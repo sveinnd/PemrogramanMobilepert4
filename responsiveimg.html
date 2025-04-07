@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --dark: #1b263b;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .gallery-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.2);
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 40px 80px -30px rgba(0,0,0,0.25);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            animation: shine 8s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .image-container {
+            padding: 2rem;
+            position: relative;
+        }
+
+        .photo-frame {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.2);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .photo-frame::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .photo-frame img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .photo-meta {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .meta-item i {
+            color: var(--accent);
+        }
+
+        .like-btn {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .like-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .like-btn:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery-card {
+                border-radius: 12px;
+            }
+            
+            .image-container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .photo-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .photo-meta {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-card">
+        <div class="header">
+            <h1>Pertemuan 4 : Responsive Image</h1>
+            <p class="subtitle">245410102 Andika</p>
+        </div>
+        
+        <div class="image-container">
+            <div class="photo-frame">
+                <!-- Replace with your image URL -->
+                <img src="https://images5.alphacoders.com/131/1318040.jpg" 
+                     alt="Beautiful Landscape" 
+                     title="Foto Pemandangan">
+            </div>
+            
+            <div class="photo-info">
+                <div class="photo-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-camera"></i>
+                        <span>gambar dari internet</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Maret 7, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Huanglong, Solaris-3</span>
+                    </div>
+                </div>
+                
+                <button class="like-btn">
+                    <i class="fas fa-heart"></i>
+                    <span>Like</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© mantap</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple like button functionality
+        const likeBtn = document.querySelector('.like-btn');
+        likeBtn.addEventListener('click', function() {
+            this.classList.toggle('liked');
+            const icon = this.querySelector('i');
+            const text = this.querySelector('span');
+            
+            if (this.classList.contains('liked')) {
+                icon.style.color = '#ff3e3e';
+                text.textContent = 'Liked!';
+                this.style.background = 'linear-gradient(135deg, #ff3e3e, #ff7676)';
+            } else {
+                icon.style.color = 'white';
+                text.textContent = 'Like';
+                this.style.background = 'linear-gradient(135deg, var(--accent), var(--primary))';
+            }
+        });
+    </script>
+</body>
+</html>
